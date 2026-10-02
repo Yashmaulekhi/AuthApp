@@ -1,0 +1,77 @@
+server:
+  port: 8084
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_NAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:test-client-id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:test-client-secret}
+               #/login/outh2/code/google
+            scope:
+              - openid
+              - email
+              - profile
+          github:
+            client-id: ${GITHUB_CLIENT_ID:test-client-id}
+            client-secret: ${GITHUB_CLIENT_SECRET:test-client-secret}
+            redirect-uri: "http://localhost:8084/login/oauth2/code/github"
+               #/login/outh2/code/github
+            scope:
+              - user:email
+              - read:user
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+jwt:
+  secret: ${JWT_SECRET:saiofal;vkasfbehwqopfhjashofjaswfpojasfvbafop[hfifonfo[shjfwefjjfsflajfsahfosh}
+  issuer: ${JWT_ISSUER:api.subsorting.com}
+  access-ttl-seconds: ${JWT_ACCESS_TTL_SECONDS:3600}
+  refresh-ttl-seconds: ${JWT_REFRESH_TTL_SECONDS:86400}
+  refresh-token-cookie-name: ${JWT_REFRESH_COOKIE_NAME:refreshToken}
+  cookie-secure: ${JWT_COOKIE_SECURE:true}
+  cookie-http-only: ${JWT_COOKIE_HTTP_ONLY:true}
+  cookie-same-site: ${JWT_COOKIE_SAME_SITE:Lax}
+  cookie-domain: ${JWT_COOKIE_DOMAIN:localhost}
+
+  #    hikari:
+
+  #      pool-name: HikariCP
+
+  #      maximum-pool-size: 5
+
+  #      connection-timeout: 10000
+
+  #      idle-timeout: 60000
+
+  #      max-lifetime: 1800000
+
+  #      validation-timeout: 1800000
+
+  #      leak-detection-threshold: 0
+
+  #      initialization-fail-timeout: -1
+app:
+  auth:
+    frontend:
+      success-redirect: http://localhost:5173/auth/success
+      failure-redirect: http://localhost:5173/auth/failure
