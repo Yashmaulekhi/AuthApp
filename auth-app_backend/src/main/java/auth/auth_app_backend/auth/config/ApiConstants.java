@@ -16,7 +16,7 @@ public class ApiConstants {
             "/error"
     };
     public static final String[] AUTH_ADMIN_URLS= {
-            "/api/v1/users/**"
+            "/users/**"
     };
 
     public static final String[] AUTH_GUEST_URLS= {

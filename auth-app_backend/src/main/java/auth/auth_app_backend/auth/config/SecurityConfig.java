@@ -66,6 +66,7 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
+                    .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(ApiConstants.AUTH_PUBLIC_URLS).permitAll()
                         .requestMatchers(ApiConstants.AUTH_ADMIN_URLS).hasRole(ApiConstants.ADMIN_ROLE)
                         .requestMatchers(ApiConstants.AUTH_GUEST_URLS).hasRole(ApiConstants.GUEST_ROLE)
