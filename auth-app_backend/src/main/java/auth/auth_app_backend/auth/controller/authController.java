@@ -38,7 +38,7 @@ import jakarta.servlet.http.Cookie;
 
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 @AllArgsConstructor
 public class authController {
     private final AuthService authService;
