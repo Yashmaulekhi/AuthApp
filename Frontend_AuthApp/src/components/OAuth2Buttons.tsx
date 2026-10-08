@@ -8,7 +8,7 @@ function OAuth2Buttons() {
     <div className="space-y-3">
       <a
         href={`${
-          import.meta.env.VITE_BASE_URL || "http://localhost:8084"
+          import.meta.env.VITE_BASE_URL || "https://authapp-production-7275.up.railway.app"
         }/oauth2/authorization/google`}
         className={"block"}
       >
