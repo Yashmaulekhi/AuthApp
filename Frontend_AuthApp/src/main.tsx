@@ -12,6 +12,7 @@ import Userlayout from "./pages/users/Userlayout.tsx";
 import Userhome from "./pages/users/Userhome.tsx";
 import Userprofile from "./pages/users/Userprofile.tsx";
 import OAuthSuccess from "./pages/OAuthSuccess.tsx";
+import OAuthFailure from "./pages/OAuthFailure.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
@@ -28,7 +29,7 @@ createRoot(document.getElementById("root")!).render(
           {/* .... */}
         </Route>
         <Route path="auth/success" element={<OAuthSuccess />} />
-        <Route path="auth/failure" element={<OAuthSuccess />} />
+        <Route path="auth/failure" element={<OAuthFailure />} />
       </Route>
     </Routes>
   </BrowserRouter>
