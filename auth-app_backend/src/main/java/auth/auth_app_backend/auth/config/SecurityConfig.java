@@ -74,9 +74,17 @@ public class SecurityConfig {
                 )
                 
 
-                .oauth2Login(oauth2 -> oauth2
-                        .successHandler(handler)
-                )
+               .oauth2Login(oauth2 -> oauth2
+    .successHandler(handler)
+    .failureHandler((request, response, exception) -> {
+        System.err.println("OAuth LOGIN FAILED:");
+        exception.printStackTrace();
+
+        response.sendRedirect(
+            "https://auth-app-phi-nine.vercel.app/auth/failure"
+        );
+    })
+)
 
                 .logout(AbstractHttpConfigurer::disable)
 
