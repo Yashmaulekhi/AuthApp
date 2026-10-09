@@ -126,7 +126,9 @@ public class OAUTH2SuccessHandler implements AuthenticationSuccessHandler {
                 .createdAt(Instant.now())
                 .expiresAt(Instant.now().plusSeconds(jwtService.getRefreshTtlSeconds()))
                 .build();
-        refreshTokenRepository.save(refreshToken);
+        System.out.println("Before refresh token save");
+refreshTokenRepository.save(refreshToken);
+System.out.println("After refresh token save");
         String accessToken= jwtService.generateAccessToken(user);
         String refreshTokens= jwtService.generateRefreshToken(user,refreshToken.getJti());
 
