@@ -6,7 +6,7 @@ import auth.auth_app_backend.auth.entities.User;
 import java.time.Instant;
 import java.util.UUID;
     @Entity
-    @Table(name="refresh Token",indexes={
+    @Table(name="refresh_tokens",indexes={
             @Index(name="refresh_tokens_jti_idx",columnList = "jti",unique = true),
             @Index(name="refresh_tokens_user_id_idx",columnList = "user_id")
 
