@@ -195,6 +195,30 @@ public class authController {
             }
             return Optional.empty();
         }
+        @PostMapping("/logout")
+public ResponseEntity<Void> logout(
+        @RequestBody(required = false) RefreshTokenRequest body,
+        HttpServletRequest request,
+        HttpServletResponse response) {
+
+    readRefreshTokenFromRequest(body, request).ifPresent(token -> {
+        try {
+            if (jwtService.isRefreshTokenValid(token)) {
+                String jti = jwtService.getJti(token);
+                refreshTokenRepository.findByJti(jti).ifPresent(rt -> {
+                    rt.setRevoked(true);
+                    refreshTokenRepository.save(rt);
+                });
+            }
+        } catch (Exception ignored) {
+            // token invalid/expired ho to bhi logout chalna chahiye
+        }
+    });
+
+    cookieService.clearRefreshToken(response);
+    cookieService.addNoStoreHeaders(response);
+    return ResponseEntity.noContent().build();
+}
         // logic to read from body or cookie
     }
 
